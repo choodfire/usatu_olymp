@@ -3,5 +3,5 @@ CREATE TABLE IF NOT EXISTS payments (
     user_id INT NOT NULL,
     type VARCHAR(255) NOT NULL,
     amount FLOAT NOT NULL,
-    FOREIGN KEY (user_id) REFERENCES users (id)
+    FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE
 );
