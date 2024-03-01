@@ -1,3 +1,5 @@
+{% include "header.html" %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -30,6 +32,24 @@
       </div>
       <div class="form-example">
         <input type="submit" value="Добавить" />
+      </div>
+    </form>
+
+    <br>
+    <br>
+
+    <h1>Изменить пользователя</h1>
+    <form action="/change_user/" method="post" class="form-example">
+      <div class="form-example">
+        <label for="id">id: </label>
+        <input type="text" name="id" id="id" required />
+      </div>
+      <div class="form-example">
+        <label for="name">Новое имя: </label>
+        <input type="text" name="name" id="name" required />
+      </div>
+      <div class="form-example">
+        <input type="submit" value="Изменить" />
       </div>
     </form>
 
