@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>USATU OLYMP</title>
+</head>
+<body>
+    <h1>Пользователи</h1>
+    <table cellspacing="3" bgcolor="#000000">
+        <tr bgcolor="#ffffff">
+            <th>id</th>
+            <th>ФИО</th>
+        </tr>
+        {% for user in users %}
+            <tr bgcolor="#ffffff">
+                <th>{{ user[0] }}</th>
+                <th>{{ user[1] }}</th>
+            </tr>
+        {% endfor %}
+    </table>
+
+</body>
+</html>

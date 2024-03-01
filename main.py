@@ -2,7 +2,7 @@ from flask import Flask, render_template
 import pymysql
 from dotenv import load_dotenv
 import os
-from database.database import init_db
+from database.database import init_db, select_all_users, select_all_users_payments
 
 
 env_path = '.env'
@@ -17,10 +17,18 @@ db = pymysql.connect(host=DB_HOST, user=DB_USER, password=DB_PASS, database=DB_D
 
 
 @app.route('/')
-def hello() -> None:
-    return render_template('index.html')
+def main() -> str:
+    users = select_all_users_payments(db)
+    return render_template('index.html', users=users)
+
+
+@app.route('/users/')
+def users() -> str:
+    users = select_all_users(db)
+    return render_template('users.html', users=users)
 
 
 if __name__ == "__main__":
     init_db(db)
+    select_all_users(db)
     app.run(host="localhost", port=8080)
