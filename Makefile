@@ -1,2 +1,2 @@
 run:
-	flask --app main run --port=8080
+	python3 main.py

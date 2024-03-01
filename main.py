@@ -17,3 +17,7 @@ db = pymysql.connect(host=DB_HOST, user=DB_USER, password=DB_PASS, database=DB_D
 @app.route('/')
 def hello():
     return render_template('index.html')
+
+
+if __name__ == "__main__":
+    app.run(host="localhost", port=8080)
