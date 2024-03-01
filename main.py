@@ -3,7 +3,7 @@ import pymysql
 from dotenv import load_dotenv
 import os
 
-from database.database import init_db, select_all_users, select_all_users_payments, add_user_db, change_user_db
+from database.database import init_db, select_all_users, select_all_users_payments, add_user_db, change_user_db, delete_user_db
 
 
 env_path = '.env'
@@ -41,6 +41,12 @@ def change_user() -> Response:
     new_name = request.form['name']
     user_id = request.form['id']
     change_user_db(db, user_id, new_name)
+    return redirect('/users/', code=302)
+
+
+@app.route('/delete_user/<user_id>', methods=['GET'])
+def delete_user(user_id: int) -> Response:
+    delete_user_db(db, str(user_id))
     return redirect('/users/', code=302)
 
 

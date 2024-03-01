@@ -44,3 +44,11 @@ def change_user_db(db: Connection, id: str, name: str) -> None:
         cursor.execute(sql, (name, id))
 
     db.commit()
+
+
+def delete_user_db(db: Connection, id: str) -> None:
+    sql = "DELETE FROM users WHERE id=%s"
+    with db.cursor() as cursor:
+        cursor.execute(sql, (id))
+
+    db.commit()
