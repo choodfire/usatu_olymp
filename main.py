@@ -1,8 +1,9 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request, redirect, Response
 import pymysql
 from dotenv import load_dotenv
 import os
-from database.database import init_db, select_all_users, select_all_users_payments
+
+from database.database import init_db, select_all_users, select_all_users_payments, add_user_db
 
 
 env_path = '.env'
@@ -16,16 +17,23 @@ DB_DATABASE = os.getenv('DB_DATABASE')
 db = pymysql.connect(host=DB_HOST, user=DB_USER, password=DB_PASS, database=DB_DATABASE)
 
 
-@app.route('/')
+@app.route('/', methods=['GET'])
 def main() -> str:
     users = select_all_users_payments(db)
     return render_template('index.html', users=users)
 
 
-@app.route('/users/')
+@app.route('/users/', methods=['GET'])
 def users() -> str:
     users = select_all_users(db)
     return render_template('users.html', users=users)
+
+
+@app.route('/add_user/', methods=['POST'])
+def add_user() -> Response:
+    user_name = request.form['name']
+    add_user_db(db, user_name)
+    return redirect('/users/', code=302)
 
 
 if __name__ == "__main__":

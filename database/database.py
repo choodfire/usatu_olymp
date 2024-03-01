@@ -12,7 +12,7 @@ def init_db(db: Connection) -> None:
 
 
 def select_all_users_payments(db: Connection) -> tuple[str, str, float]:
-    sql = ("SELECT users.id, users.fio, payments.type, payments.amount FROM users INNER JOIN payments ON "
+    sql = ("SELECT users.fio, payments.type, payments.amount FROM users INNER JOIN payments ON "
            "users.id=payments.user_id;")
     with db.cursor() as cursor:
         cursor.execute(sql)
@@ -22,9 +22,15 @@ def select_all_users_payments(db: Connection) -> tuple[str, str, float]:
 
 
 def select_all_users(db: Connection) -> tuple[str, str]:
-    sql = ("SELECT users.id, users.fio FROM users")
+    sql = "SELECT users.id, users.fio FROM users"
     with db.cursor() as cursor:
         cursor.execute(sql)
     result = cursor.fetchall()
 
     return result
+
+
+def add_user_db(db: Connection, name: str) -> None:
+    sql = "INSERT INTO users (fio) VALUE (%s);"
+    with db.cursor() as cursor:
+        cursor.execute(sql, name)

@@ -19,5 +19,19 @@
         {% endfor %}
     </table>
 
+    <br>
+    <br>
+
+    <h1>Добавить пользователя</h1>
+    <form action="/add_user/" method="post" class="form-example">
+      <div class="form-example">
+        <label for="name">Имя: </label>
+        <input type="text" name="name" id="name" required />
+      </div>
+      <div class="form-example">
+        <input type="submit" value="Добавить" />
+      </div>
+    </form>
+
 </body>
 </html>
