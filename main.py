@@ -1,8 +1,10 @@
-from flask import Flask
+from flask import Flask, render_template
+import pymysql
 
 app = Flask(__name__)
+db = pymysql.connect(host="localhost", user="root", password="pass", database="db")
 
 
 @app.route('/')
 def hello():
-    return 'Hello, World!'
+    return render_template('index.html')
