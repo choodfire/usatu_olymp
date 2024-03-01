@@ -34,3 +34,9 @@ def add_user_db(db: Connection, name: str) -> None:
     sql = "INSERT INTO users (fio) VALUE (%s);"
     with db.cursor() as cursor:
         cursor.execute(sql, name)
+
+
+def change_user_db(db: Connection, id: str, name: str) -> None:
+    sql = "UPDATE users SET fio=%s WHERE id=%s;"
+    with db.cursor() as cursor:
+        cursor.execute(sql, (name, id))

@@ -3,7 +3,7 @@ import pymysql
 from dotenv import load_dotenv
 import os
 
-from database.database import init_db, select_all_users, select_all_users_payments, add_user_db
+from database.database import init_db, select_all_users, select_all_users_payments, add_user_db, change_user_db
 
 
 env_path = '.env'
@@ -33,6 +33,14 @@ def users() -> str:
 def add_user() -> Response:
     user_name = request.form['name']
     add_user_db(db, user_name)
+    return redirect('/users/', code=302)
+
+
+@app.route('/change_user/', methods=['POST'])
+def change_user() -> Response:
+    new_name = request.form['name']
+    user_id = request.form['id']
+    change_user_db(db, user_id, new_name)
     return redirect('/users/', code=302)
 
 
