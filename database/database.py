@@ -31,12 +31,16 @@ def select_all_users(db: Connection) -> tuple[str, str]:
 
 
 def add_user_db(db: Connection, name: str) -> None:
-    sql = "INSERT INTO users (fio) VALUE (%s);"
+    sql = "INSERT INTO `users` (`fio`) VALUE (%s)"
     with db.cursor() as cursor:
-        cursor.execute(sql, name)
+        cursor.execute(sql, (name))
+
+    db.commit()
 
 
 def change_user_db(db: Connection, id: str, name: str) -> None:
-    sql = "UPDATE users SET fio=%s WHERE id=%s;"
+    sql = "UPDATE users SET fio=%s WHERE id=%s"
     with db.cursor() as cursor:
         cursor.execute(sql, (name, id))
+
+    db.commit()
